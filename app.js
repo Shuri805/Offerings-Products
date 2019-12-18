@@ -9,14 +9,31 @@ async function offerings(){
     const firstOffering = [data[0].productId, data[0].companyId]
     console.log(firstOffering);
 
+    products(data[0].productId);
+    companies(data[0].companyId)
+
 
 }
 
 async function products(productId){
     const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/products')
     const data = await response.json();
-    const product = data.find(productID)
+    const productInfo = data.find((product)=>{
+        if(product.id === productId){
+            return product;
+        }
+    })
+    console.log(productInfo);
 }
 
+async function companies(companyId){
+    const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/companies')
+    const data = await response.json();
+    const companyName = data.find((company)=>{
+        if(company.id === companyId){
+            return company;
+        }
+    })
+    console.log(companyName)
+}
 offerings();
-products();
